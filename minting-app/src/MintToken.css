@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 50px);
+}
+
+.banner {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #222;
+    color: #4CAF50;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.ticker-wrap {
+    overflow: hidden;
+    width: 100%;
+}
+
+.ticker {
+    display: flex;
+    width: fit-content;
+    animation: ticker 30s linear infinite;
+}
+
+.ticker-item {
+    padding: 0 20px;
+    white-space: nowrap;
+    font-family: 'Press Start 2P', monospace; /* Applying the pixelated font */
+    color: #fff; /* Setting the color to white */
+}
+
+.percentage {
+    font-family: 'Press Start 2P', monospace;
+    color: #FFD700; /* Keeping the percentage gold for better contrast */
+}
+
+@keyframes ticker {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.card {
+    background: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="number"], button {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+input[type="number"] {
+    width: 150px; 
+    border: 2px solid #555;
+    background: #222;
+    color: #fff;
+}
+
+button {
+    width: 150px; 
+    background-color: #007bff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
