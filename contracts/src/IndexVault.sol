@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "lib/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 
-contract AIVault is Ownable {
+contract AIVault is Ownable, ERC20 {
     IUniswapV2Router02 uniswapRouter;
     ERC20 public immutable asset_;
     struct Allocation {
@@ -17,7 +17,7 @@ contract AIVault is Ownable {
     Allocation[] public allocations;
     mapping(address => bool) public allowedTokens;
 
-    constructor() ERC20("AIVault", "AIV"){
+    constructor() ERC20("AIVault", "AIV") Ownable(msg.sender){
         uniswapRouter = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); // Replace with the actual Uniswap V2 Router address
     }
 
@@ -48,11 +48,9 @@ contract AIVault is Ownable {
     }
 
     // Override the deposit behavior
-    function deposit(uint256 assets, address receiver) public override returns (uint256 shares) {
-        shares = super.deposit(assets, receiver);
-        purchaseTokens(assets);
-        _mint(shares, receiver);
-        return shares;
+    function deposit(uint256 assets, address receiver) public  returns (uint256 shares) {     
+        purchaseTokens(assets, assets);
+        return assets;
     }
 
     // Logic for purchasing tokens based on allocations
