@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@keydonix/uniswap-oracle-contracts": "^1.0.6",
+    "@keydonix/uniswap-oracle-sdk": "^1.0.7"
+  }
+}

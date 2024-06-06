@@ -48,13 +48,23 @@ contract AIVault is Ownable, ERC20 {
     }
 
     // Override the deposit behavior
-    function deposit(uint256 assets, address receiver) public  returns (uint256 shares) {     
-        purchaseTokens(assets, assets);
+    function deposit() public payable returns (uint256 shares) {     
+        purchaseTokens(msg.value);
+        //mint totalSuppy
         return assets;
     }
 
+    function getTotalEthValue() public view returns (uint256) {
+        uint256 totalValue = address(this).balance;
+        for (uint i = 0; i < allocations.length; ++i) {
+            Allocation memory allocation = allocations[i];
+            totalValue += getEthValue(allocation.token, IERC20(allocation.token).balanceOf(address(this)));
+        }
+        return totalValue;
+    }
+
     // Logic for purchasing tokens based on allocations
-    function purchaseTokens(uint256 amountETH, uint256 amountOutMin) internal {
+    function purchaseTokens(uint256 amountETH) internal {
         uint length = allocations.length;
         for (uint i = 0; i < length; ++i) {
             Allocation memory allocation = allocations[i];

@@ -14,6 +14,7 @@ contract AIVaultTest is Test {
         }
 
     function setUp() public {
+        vm.createSelectFork("https://rpc.ankr.com/eth", 19862999);
         // Initialize your AIVault contract with the Uniswap router address
         vault = new AIVault(uniswapRouterAddress);
         //Identifier for Allocation struct
@@ -39,7 +40,7 @@ contract AIVaultTest is Test {
     //     uint256 amountETH = 1 ether;
 
     //     // Act: Call the function you want to test
-    //     vault.swapETHForTokens(tokenAddress, amountETH);
+    //     vault.deposit(tokenAddress, amountETH);
 
     //     // Assert: Check the results of your function call
     //     assertEq(IERC20(tokenAddress).balanceOf(address(vault)), expectedTokenAmount);
